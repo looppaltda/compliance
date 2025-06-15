@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCJB Compliance</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.344.0/lucide.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="logo-icon">
+                    <i data-lucide="check-square"></i>
+                </div>
+                <h1>CCJB Compliance</h1>
+                <p>Faça login para acessar sua conta</p>
+            </div>
+
+            <div class="login-form-container">
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-with-icon">
+                            <i data-lucide="mail"></i>
+                            <input type="email" id="email" placeholder="seu@email.com" required>
+                        </div>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="input-with-icon">
+                            <i data-lucide="lock"></i>
+                            <input type="password" id="password" placeholder="Digite sua senha" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i data-lucide="eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="passwordError"></div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            Lembrar de mim
+                        </label>
+                        <button type="button" class="forgot-password">Esqueceu a senha?</button>
+                    </div>
+
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <i data-lucide="log-in"></i>
+                        <span>Entrar</span>
+                        <div class="loading-spinner" id="loginSpinner"></div>
+                    </button>
+                </form>
+
+                <div class="login-footer">
+                    <p>Não tem uma conta? <button class="contact-btn">Entre em contato</button></p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>© 2025 - Looppa Lab Tech. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="main-app hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i data-lucide="check-square"></i>
+                        </div>
+                        <h1>CCJB Compliance</h1>
+                    </div>
+                </div>
+
+                <div class="header-nav">
+                    <button class="nav-btn primary" id="newCompanyBtn">
+                        <i data-lucide="plus"></i>
+                        <span>Nova Empresa</span>
+                    </button>
+                    <button class="nav-btn secondary">
+                        <i data-lucide="archive"></i>
+                        <span>Arquivadas</span>
+                    </button>
+                    <button class="nav-btn success">
+                        <i data-lucide="check-square"></i>
+                        <span>Tarefas</span>
+                    </button>
+                </div>
+
+                <div class="header-right">
+                    <button class="notification-btn" id="notificationBtn">
+                        <i data-lucide="bell"></i>
+                        <span class="notification-badge">2</span>
+                    </button>
+                    
+                    <div class="user-menu" id="userMenu">
+                        <button class="user-btn" id="userBtn">
+                            <div class="user-avatar">
+                                <i data-lucide="user"></i>
+                            </div>
+                            <div class="user-info">
+                                <p class="user-name">Vagner Franco</p>
+                                <p class="user-email">vagner@ccjb.com.br</p>
+                            </div>
+                            <i data-lucide="chevron-down"></i>
+                        </button>
+                        
+                        <div class="user-dropdown" id="userDropdown">
+                            <button class="dropdown-item" id="profileBtn">
+                                <i data-lucide="user"></i>
+                                <span>Perfil</span>
+                            </button>
+                            <button class="dropdown-item" id="logoutBtn">
+                                <i data-lucide="log-out"></i>
+                                <span>Sair</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-nav">
+                <button class="mobile-nav-btn primary" id="mobileNewCompanyBtn">
+                    <i data-lucide="plus"></i>
+                    <span>Nova Empresa</span>
+                </button>
+                <button class="mobile-nav-btn secondary">
+                    <i data-lucide="archive"></i>
+                    <span>Arquivadas</span>
+                </button>
+                <button class="mobile-nav-btn success">
+                    <i data-lucide="check-square"></i>
+                    <span>Tarefas</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <div class="stats-content">
+                        <div class="stats-text">
+                            <p class="stats-title">Total de Empresas</p>
+                            <p class="stats-value" id="totalCompanies">6</p>
+                        </div>
+                        <div class="stats-icon blue">
+                            <i data-lucide="building-2"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-content">
+                        <div class="stats-text">
+                            <p class="stats-title">Em Andamento</p>
+                            <p class="stats-value" id="inProgress">2</p>
+                        </div>
+                        <div class="stats-icon orange">
+                            <i data-lucide="clock"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-content">
+                        <div class="stats-text">
+                            <p class="stats-title">Concluídas</p>
+                            <p class="stats-value" id="completed">2</p>
+                        </div>
+                        <div class="stats-icon green">
+                            <i data-lucide="check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="stats-content">
+                        <div class="stats-text">
+                            <p class="stats-title">Arquivadas</p>
+                            <p class="stats-value">2</p>
+                        </div>
+                        <div class="stats-icon gray">
+                            <i data-lucide="archive"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Columns -->
+            <div class="task-columns">
+                <div class="task-column">
+                    <div class="column-header">
+                        <h3>A Fazer</h3>
+                        <span class="task-count" id="todoCount">(2)</span>
+                    </div>
+                    <div class="task-list" id="todoTasks">
+                        <!-- Tasks will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="task-column">
+                    <div class="column-header">
+                        <h3>Em Andamento</h3>
+                        <span class="task-count" id="progressCount">(2)</span>
+                    </div>
+                    <div class="task-list" id="progressTasks">
+                        <!-- Tasks will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="task-column">
+                    <div class="column-header">
+                        <h3>Concluídas</h3>
+                        <span class="task-count" id="completedCount">(2)</span>
+                    </div>
+                    <div class="task-list" id="completedTasks">
+                        <!-- Tasks will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>© 2025 - Looppa Lab Tech. Todos os direitos reservados.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Company Form Modal -->
+    <div id="companyModal" class="modal hidden">
+        <div class="modal-content company-form">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <div class="modal-icon">
+                        <i data-lucide="building-2"></i>
+                    </div>
+                    <h2>Nova Empresa</h2>
+                </div>
+                <button class="close-btn" id="closeCompanyModal">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <form id="companyForm" class="form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="cnpj">CNPJ *</label>
+                        <input type="text" id="cnpj" placeholder="00.000.000/0000-00" maxlength="18" required>
+                        <div class="error-message" id="cnpjError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyName">Nome da Empresa *</label>
+                        <input type="text" id="companyName" placeholder="Digite o nome da empresa" required>
+                        <div class="error-message" id="companyNameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companySize">Porte *</label>
+                        <select id="companySize" required>
+                            <option value="">Selecione o porte</option>
+                            <option value="MEI">Microempreendedor Individual (MEI)</option>
+                            <option value="ME">Microempresa (ME)</option>
+                            <option value="EPP">Empresa de Pequeno Porte (EPP)</option>
+                            <option value="MEDIO">Médio Porte</option>
+                            <option value="GRANDE">Grande Porte</option>
+                        </select>
+                        <div class="error-message" id="companySizeError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyType">Tipo *</label>
+                        <select id="companyType" required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="LTDA">Sociedade Limitada (LTDA)</option>
+                            <option value="SA">Sociedade Anônima (S/A)</option>
+                            <option value="EIRELI">Empresa Individual (EIRELI)</option>
+                            <option value="EI">Empresário Individual (EI)</option>
+                            <option value="SLU">Sociedade Limitada Unipessoal (SLU)</option>
+                        </select>
+                        <div class="error-message" id="companyTypeError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">Estado *</label>
+                        <select id="state" required>
+                            <option value="">Selecione o estado</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                        </select>
+                        <div class="error-message" id="stateError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">Cidade *</label>
+                        <input type="text" id="city" placeholder="Digite a cidade" required>
+                        <div class="error-message" id="cityError"></div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="address">Endereço *</label>
+                        <input type="text" id="address" placeholder="Digite o endereço completo" required>
+                        <div class="error-message" id="addressError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cnae">CNAE *</label>
+                        <input type="text" id="cnae" placeholder="0000-0/00" required>
+                        <div class="error-message" id="cnaeError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Telefone *</label>
+                        <input type="text" id="phone" placeholder="(00) 00000-0000" maxlength="15" required>
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="companyEmail">Email *</label>
+                        <input type="email" id="companyEmail" placeholder="empresa@exemplo.com" required>
+                        <div class="error-message" id="companyEmailError"></div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" id="cancelCompanyForm">
+                        <i data-lucide="arrow-left"></i>
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="submit" class="btn primary">
+                        <i data-lucide="save"></i>
+                        <span>Salvar Empresa</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notifications Modal -->
+    <div id="notificationsModal" class="modal hidden">
+        <div class="modal-content notifications">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <div class="modal-icon">
+                        <i data-lucide="bell"></i>
+                    </div>
+                    <div>
+                        <h2>Notificações</h2>
+                        <p class="notification-subtitle" id="unreadCount">2 não lidas</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="mark-all-read" id="markAllRead">Marcar todas como lidas</button>
+                    <button class="close-btn" id="closeNotificationsModal">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="notifications-filters">
+                <div class="search-box">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="notificationSearch" placeholder="Buscar notificações...">
+                </div>
+                <div class="filter-select">
+                    <i data-lucide="filter"></i>
+                    <select id="notificationFilter">
+                        <option value="all">Todas</option>
+                        <option value="unread">Não lidas</option>
+                        <option value="success">Sucesso</option>
+                        <option value="warning">Aviso</option>
+                        <option value="error">Erro</option>
+                        <option value="info">Informação</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="notifications-list" id="notificationsList">
+                <!-- Notifications will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div id="profileModal" class="modal hidden">
+        <div class="modal-content profile">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <button class="back-btn" id="closeProfileModal">
+                        <i data-lucide="arrow-left"></i>
+                    </button>
+                    <h2>Perfil do Usuário</h2>
+                </div>
+                <button class="logout-btn" id="profileLogoutBtn">
+                    <i data-lucide="log-out"></i>
+                    <span>Sair</span>
+                </button>
+            </div>
+
+            <div class="profile-content">
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <i data-lucide="user"></i>
+                    </div>
+                    <h3>Vagner Franco</h3>
+                    <p>vagner@ccjb.com.br</p>
+                    <div class="profile-badge">Usuário</div>
+                </div>
+
+                <div class="profile-info">
+                    <div class="profile-header">
+                        <h3>Informações do Perfil</h3>
+                        <p>Detalhes da sua conta no sistema</p>
+                    </div>
+
+                    <div id="profileView" class="profile-view">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i data-lucide="user"></i>
+                                    <span>Nome Completo</span>
+                                </div>
+                                <p>Vagner Franco</p>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i data-lucide="mail"></i>
+                                    <span>Email</span>
+                                </div>
+                                <p>vagner@ccjb.com.br</p>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i data-lucide="user"></i>
+                                    <span>Função</span>
+                                </div>
+                                <p>Usuário</p>
+                            </div>
+
+                            <div class="info-item">
+                                <div class="info-label">
+                                    <i data-lucide="calendar"></i>
+                                    <span>Membro desde</span>
+                                </div>
+                                <p>11/06/2025</p>
+                            </div>
+                        </div>
+
+                        <div class="profile-actions">
+                            <h4>Ações da Conta</h4>
+                            <div class="action-buttons">
+                                <button class="action-btn" id="editProfileBtn">
+                                    <i data-lucide="edit"></i>
+                                    <span>Editar Perfil</span>
+                                </button>
+                                <button class="action-btn danger" id="profileLogoutBtn2">
+                                    <i data-lucide="log-out"></i>
+                                    <span>Sair da Conta</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="profileEdit" class="profile-edit hidden">
+                        <form id="profileForm" class="form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="profileName">Nome Completo</label>
+                                    <input type="text" id="profileName" value="Vagner Franco">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="profileEmail">Email</label>
+                                    <input type="email" id="profileEmail" value="vagner@ccjb.com.br">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="profileRole">Função</label>
+                                    <select id="profileRole">
+                                        <option value="Usuário" selected>Usuário</option>
+                                        <option value="Administrador">Administrador</option>
+                                        <option value="Analista">Analista</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn secondary" id="cancelProfileEdit">
+                                    <i data-lucide="x"></i>
+                                    <span>Cancelar</span>
+                                </button>
+                                <button type="submit" class="btn primary">
+                                    <i data-lucide="save"></i>
+                                    <span>Salvar Alterações</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/company.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
